@@ -2,6 +2,10 @@
 
 # FIXME: /dev/ttyUSB1 should not be hardcoded
 
-set -e
+set -ex
+
+# create bin file
 riscv64-elf-objcopy $1 -O binary $1.bin
-litex_term --kernel $1.bin /dev/ttyUSB1
+
+# upload binary
+litex_term --kernel $1.bin $DEVICE

@@ -3,8 +3,8 @@
 
 extern crate panic_halt;
 
-use riscv_rt::entry;
 use litex_pac as pac;
+use riscv_rt::entry;
 
 fn uart_write(uart: &pac::Uart, value: u8) {
     while uart_txfull_read(uart) != 0 {}
@@ -28,6 +28,6 @@ fn main() -> ! {
     let uart = peripherals.uart;
 
     loop {
-        hprint(&uart, "aaaaa");
+        hprint(&uart, "hello\n");
     }
 }

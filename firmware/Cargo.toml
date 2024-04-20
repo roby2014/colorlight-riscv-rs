@@ -1,0 +1,9 @@
+[package]
+name = "firmware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+riscv-rt = "0.12.0"
+panic-halt = "0.2.0"
+litex-pac = { path = "../litex-pac" }

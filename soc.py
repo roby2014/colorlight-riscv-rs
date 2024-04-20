@@ -32,7 +32,6 @@ class BaseSoC(SoCCore):
         # Clock Reset Generation
         self.submodules.crg = CRG(platform.request("clk25"))
 
-
 # Build --------------------------------------------------------------------------------------------
 
 def main():
@@ -48,14 +47,6 @@ def main():
 
     soc = BaseSoC("5A-75E", revision=args.revision)
 
-    #builder_kwargs = builder_argdict(args)
-    #builder_kwargs["compile_software"] = False
-    #if builder_kwargs["csr_svd"] is None:
-    #    builder_kwargs["csr_svd"] = f"../litex-pac/5a-75e_{args.revision}.svd"
-    #if builder_kwargs["memory_x"] is None:
-    #    builder_kwargs["memory_x"] = "../litex-pac/memory.x"
-    #
-    
     builder = Builder(soc, **builder_argdict(args))
     builder.build(**trellis_argdict(args), run=args.build)
 
@@ -66,7 +57,7 @@ def main():
         elif args.cable == "usb-blaster":
             extra_args = f"--probe-firmware {os.environ['QUARTUSPATH']}"
             
-        bitstream_file = os.path.join(builder.gateware_dir, f'{soc.build_name}.bit')
+        bitstream_file = builder.get_bitstream_filename()
         cmd = f"openFPGALoader --cable {args.cable} {extra_args} {bitstream_file}"
         print(f"Uploading bitstream file: {bitstream_file}")
         print(f"JTAG cable: {args.cable}")
