@@ -3,7 +3,6 @@ use std::path::PathBuf;
 use std::process::Command;
 use std::{env, fs};
 
-extern crate form;
 extern crate svd2rust;
 
 fn main() {

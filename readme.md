@@ -12,9 +12,9 @@ with rust and open source tools ([yosys](https://github.com/YosysHQ/yosys), [nex
 ### layout
 - [soc](./soc/) - files for building & flashing the fpga with the risc-v soc
 - [litex-pac](./litex-pac/) - the peripheral access crate (pac), generated via svd2rust
-- [app](./app/) - the firmware that will run
+- [firmware](./firmware/) - the firmware that will run
 
-each directory should have a `readme.md` with instructions
+each directory should have a `readme.md` with more in-depth instructions
 
 ### firmware in c
 you can check [this repo](https://github.com/roby2014/risc-v-colorlight-5a-75e) for a similar example, but flashing a C firmware.
