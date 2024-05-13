@@ -28,6 +28,6 @@ fn main() -> ! {
     let uart = peripherals.uart;
 
     loop {
-        hprint(&uart, "aaaaa");
+        hprint(&uart, "hello\n");
     }
 }

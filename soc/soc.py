@@ -32,6 +32,8 @@ class BaseSoC(SoCCore):
         # Clock Reset Generation
         self.submodules.crg = CRG(platform.request("clk25"))
 
+        self.add_rom("bootrom", 0x20000000, 2**10, contents=get_mem_data("../firmware/target/riscv32i-unknown-none-elf/debug/firmware.bin", endianness="little"))  # "little" for the default RISCV architectures selected by litex
+        self.add_constant("ROM_BOOT_ADDRESS", 0x20000000)
 
 # Build --------------------------------------------------------------------------------------------
 
@@ -48,14 +50,6 @@ def main():
 
     soc = BaseSoC("5A-75E", revision=args.revision)
 
-    #builder_kwargs = builder_argdict(args)
-    #builder_kwargs["compile_software"] = False
-    #if builder_kwargs["csr_svd"] is None:
-    #    builder_kwargs["csr_svd"] = f"../litex-pac/5a-75e_{args.revision}.svd"
-    #if builder_kwargs["memory_x"] is None:
-    #    builder_kwargs["memory_x"] = "../litex-pac/memory.x"
-    #
-    
     builder = Builder(soc, **builder_argdict(args))
     builder.build(**trellis_argdict(args), run=args.build)
 
